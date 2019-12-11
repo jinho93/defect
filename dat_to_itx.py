@@ -13,6 +13,7 @@ total_list = []
 L = []
 for i in f:
 
+#read # and just pass!
     if i.strip()[0] == '#':
         if len(L) == 0:
             continue
