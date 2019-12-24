@@ -17,7 +17,7 @@ class PC(object):
 
     def q_model(self, g):
         """
-        In reciprocal space, the defect charge distribution is chaged to (excluding
+        In reciprocal space, the defect charge distribution is changed to (excluding
         the Fourier normalization constant)
         """
         return(self.x / np.sqrt(1+self.gamma * self.gamma * g*g)
