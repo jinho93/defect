@@ -5,7 +5,9 @@
 f = open('vAtoms.dat', 'r')
 
 """
-It is available to control the variations
+It is available to edit the variations
+r_a, r_b, and r_c are half of a, b, and c parameters in bohr unit, respectively.
+defect_a, defect_b, and defect_c are the positions of defect (a,b,c) in bohr unit, respectively.
 """
 r_a = 22.0701 / 2
 r_b = 25.4848 / 2
@@ -29,7 +31,17 @@ for i in f :
 
         """
         Screening Wigner-Seiz cell from vAtoms.dat file
+        Only use for cubic cells
+        Wigner-Seiz cell:
+        a - a' =< x =< a + a'
+        b - b' =< y =< b + b'
+        c - c' =< z =< c + c'
+        a, b, and c  are the defect position in bohr unit
+        a', b', and c' are the half of cell parameters in bohr unit
+        ellipse_cell = (x-a)^2/a'^2 + (y-b)^2/b'^2 + (z-c)^2/c'^2 = 1 ; formula of ellipse
+        ellipse_cell >= 1 
         """
+
         if tmp_list[4] >= defect_a - r_a and tmp_list[4] <= defect_a + r_a :
             if tmp_list[5] >= defect_b - r_b and tmp_list[5] <= defect_b + r_b :
                 if tmp_list[6] >= defect_c - r_c and tmp_list[6] <= defect_c + r_c :
@@ -58,6 +70,7 @@ for i in f :
             continue
 
 aver_V_list = []
+# aver_V is the align value (C value)
 aver_V = 0
 
 for i, row in enumerate(aver_L):
@@ -71,7 +84,7 @@ print(aver_V)
 
 
 """
-Create the .idx file
+Create the .idx file to plot all data including Wigner-Seiz cell
 """
 
 ff = open("vAtoms.itx", 'w')
