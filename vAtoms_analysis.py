@@ -1,5 +1,5 @@
 #!/usr/local/bin/python3.6
-from subprocess import Popen
+
 
 
 f = open('vAtoms.dat', 'r')
@@ -71,7 +71,7 @@ print(aver_V)
 
 
 """
-Write the .idx file
+Create the .idx file
 """
 
 ff = open("vAtoms.itx", 'w')
