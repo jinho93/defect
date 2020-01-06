@@ -182,8 +182,5 @@ ff.write("X SetAxis bottom 0,25" + '\n')
 ff.write("X TextBox/C/N=text1/F=0/B=1/A=MC \"\\\\f02C\\\\f00 = "+ str("%0.3f" %aver_V) +"\""+'\n')
 ff.write("X Legend/C/N=text0/J/F=0/B=1/A=MC/X=25.33/Y=-26.18"
          + " \"\\\\s(V_def_ref) \\\\f02V\\\\f00\\\\Bq/b\\\\M\\r\\\\s(V_lon)"
-         + " \\\\f02V\\\\f00\\\\BPC\\\\M\\r\\\\s(V_def_ref_lon) ∆\\\\f02V\\\\"
-         + "f00\\\\BPC,q/b\\\\M\\r\\\\s(align_potential) align\""+'\n')nd/C/N=text0/J/F=0/B=1/A=MC/X=25.33/Y=-26.18"
-         + " \"\\\\s(V_def_ref) \\\\f02V\\\\f00\\\\Bq/b\\\\M\\r\\\\s(V_lon)"
-         + " \\\\f02V\\\\f00\\\\BPC\\\\M\\r\\\\s(V_def_ref_lon) ∆\\\\f02V\\\\"
+         + " \\\\f02V\\\\f00\\\\BPC\\\\M\\r\\\\s(V_def_ref_lon) D\\\\f02V\\\\"
          + "f00\\\\BPC,q/b\\\\M\\r\\\\s(align_potential) align\""+'\n')
