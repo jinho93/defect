@@ -1,63 +1,5 @@
 #!/usr/local/bin/python3.6
 
-from subprocess import check_output
-
-############EDIT !!!################
-#epsilon
-e_xx = 11.069788
-e_yy = 11.069852
-e_zz = 11.711368
-e_xy = 0.000001
-e_xz = 0.000383
-e_yz = 0.000809
-###############
-#encut eV
-ENCUT = 500
-#path of bulk
-bulk_path = "/scratch/jinho/2_defect_postprocessing/1_ZnIn2S4/3_opt/z_bulk_supercell/"
-############EDIT  !!!###############
-
-
-
-CHARGE = float(input("charge value(the number of electron ex) -1 state  q= 1 electron: "))
-
-# covert eV to Ry unit
-ENCUT = ENCUT * 0.073498618
-
-##must edit path!!!
-check_output(f"diff {bulk_path}loop_1/POSCAR ../../loop_1/POSCAR > diff_defect.txt; exit 0;", shell=True)
-
-diff = open("diff_defect.txt", 'r')
-line_t = []
-while True:
-    line = diff.readline()
-    if not line: break
-    line_t.append(line)
-diff.close()
-
-line_t_L = line_t[-1]
-
-#defect site D_x: x position, D_y: y position, D_z: z position
-D_x = float(line_t_L.split()[1])
-D_y = float(line_t_L.split()[2])
-D_z = float(line_t_L.split()[3])
-
-
-comand = f'sxdefectalign --ecut {ENCUT:0.4f} --gstep 0.00001 --beta 1 --gamma 1 --expnorm 0 --printRho --charge {CHARGE:0.0f} --tensor {e_xx:0.6f},{e_yy:0.6f},{e_zz:0.6f},{e_yz:0.6f},{e_xz:0.6f},{e_xy:0.6f} --center {D_x:0.4f},{D_y:0.4f},{D_z:0.4f} --relative --vref ../../1_scf/LOCPOT --vdef {bulk_path}/1_scf/LOCPOT --vasp >> out.log'
-
-
-
-print (comand)
-
-check_output(comand, shell=True)
-
-##########################################################
-############ sxdefectaling ###############################
-##########################################################
-
-##########################################################
-############# postprocessing #############################
-##########################################################
 
 f = open('vAtoms.dat', 'r')
 
@@ -66,12 +8,25 @@ It is available to edit the variations
 r_a, r_b, and r_c are half of a, b, and c parameters in bohr unit, respectively.
 defect_a, defect_b, and defect_c are the positions of defect (a,b,c) in bohr unit, respectively.
 """
-r_a = 22.0701 / 2
-r_b = 25.4848 / 2
-r_c = 46.4438 / 2
-defect_a = 0
-defect_b = 0
-defect_c = 46.4438 * 0.4128
+log = open("out.log", 'r')
+line_log = []
+while True:
+    line = log.readline()
+    if not line: break
+    line_log.append(line)
+log.close()
+line_t_log = line_log[1]
+line_tt_log = line_t_log.split()[3]
+
+latt_a = float(line_tt_log[5:12])
+latt_b = float(line_tt_log[24:31])
+latt_c = float(line_tt_log[43:50])
+r_a = latt_a / 2
+r_b = latt_b / 2
+r_c = latt_c / 2
+defect_a = 0 #* D_z
+defect_b = 0 #* D_y
+defect_c = 46.4438 #* D_z
 
 
 total_list = []

@@ -1,3 +1,4 @@
+
 from subprocess import check_output
 
 ############EDIT !!!################
@@ -22,7 +23,7 @@ CHARGE = float(input("charge value(the number of electron ex) -1 state  q= 1 ele
 # covert eV to Ry unit
 ENCUT = ENCUT * 0.073498618
 
-
+##must edit path!!!
 check_output(f"diff {bulk_path}loop_1/POSCAR ../../loop_1/POSCAR > diff_defect.txt; exit 0;", shell=True)
 
 diff = open("diff_defect.txt", 'r')
@@ -48,3 +49,11 @@ comand = f'sxdefectalign --ecut {ENCUT:0.4f} --gstep 0.00001 --beta 1 --gamma 1 
 print (comand)
 
 check_output(comand, shell=True)
+
+##########################################################
+############ sxdefectaling ###############################
+##########################################################
+
+##########################################################
+############# postprocessing #############################
+##########################################################
