@@ -23,6 +23,8 @@ CHARGE = float(input("charge value(the number of electron ex) -1 state  q= 1 ele
 # covert eV to Ry unit
 ENCUT = ENCUT * 0.073498618
 
+
+
 ##must edit path!!!
 check_output(f"diff {bulk_path}loop_1/POSCAR ../../loop_1/POSCAR > diff_defect.txt; exit 0;", shell=True)
 
@@ -42,13 +44,13 @@ D_y = float(line_t_L.split()[2])
 D_z = float(line_t_L.split()[3])
 
 
-comand = f'sxdefectalign --ecut {ENCUT:0.4f} --gstep 0.00001 --beta 1 --gamma 1 --expnorm 0 --printRho --charge {CHARGE:0.0f} --tensor {e_xx:0.6f},{e_yy:0.6f},{e_zz:0.6f},{e_yz:0.6f},{e_xz:0.6f},{e_xy:0.6f} --center {D_x:0.4f},{D_y:0.4f},{D_z:0.4f} --relative --vref ../../1_scf/LOCPOT --vdef {bulk_path}/1_scf/LOCPOT --vasp >> out.log'
+command_sxd = f'sxdefectalign --ecut {ENCUT:0.4f} --gstep 0.00001 --beta 1 --gamma 1 --expnorm 0 --printRho --charge {CHARGE:0.0f} --tensor {e_xx:0.6f},{e_yy:0.6f},{e_zz:0.6f},{e_yz:0.6f},{e_xz:0.6f},{e_xy:0.6f} --center {D_x:0.4f},{D_y:0.4f},{D_z:0.4f} --relative --vref ../../1_scf/LOCPOT --vdef {bulk_path}/1_scf/LOCPOT --vasp >> out.log'
 
 
 
-print (comand)
+print (command_sxd)
 
-check_output(comand, shell=True)
+check_output(command_sxd, shell=True)
 
 ##########################################################
 ############ sxdefectaling ###############################
